@@ -6,6 +6,7 @@ import { ProductListComponent } from './products/product-list-component';
 import { FormsModule } from '@angular/forms';
 import { PipeModule } from '../pipe/pipe.module';
 import { StarComponent } from './shared/star.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { StarComponent } from './shared/star.component';
   imports: [
     BrowserModule,
     FormsModule,
-    PipeModule
+    PipeModule,
+    HttpClientModule
 
   ],
   bootstrap: [AppComponent]
