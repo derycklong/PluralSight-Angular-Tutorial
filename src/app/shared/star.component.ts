@@ -9,11 +9,11 @@ import { Component, Input,Output, OnChanges,EventEmitter } from "@angular/core";
 
 export class StarComponent implements OnChanges {
   @Input() rating: number = 1;
-  cropWidth: number = 62.25;
+  cropWidth: number = 75;
   @Output() ratingClicked: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnChanges(): void {
-    this.cropWidth = this.rating * 62.25/5;
+    this.cropWidth = this.rating * 75/5;
   }
 
   onClick(): void{
