@@ -1,5 +1,4 @@
-import { Pipe } from "@angular/core";
-import { Pipe, PipeTransform } from '@angular/transform';
+import { Pipe,PipeTransform } from "@angular/core";
 
 @Pipe({
   name: 'convertToSpaces'

@@ -5,9 +5,9 @@ import { IProduct } from "./products";
 import { catchError, tap} from 'rxjs/operators'
 import { stringify } from "@angular/compiler/src/util";
 
-@Injectable(({
+@Injectable({
   providedIn:'root'
-}))
+})
 export class ProductService{
 
   private productUrl = 'https://raw.githubusercontent.com/DeborahK/Angular-GettingStarted/master/APM-Start/src/api/products/products.json';

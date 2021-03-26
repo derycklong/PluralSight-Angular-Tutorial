@@ -7,7 +7,7 @@ import { IProduct } from './products';
   selector: 'pm-products',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
-  //providers: [ProductService] // or declare in the product.service if it is used throughout the whole app.
+  
 })
 
 
@@ -23,7 +23,7 @@ export class ProductListComponent implements OnInit {
   errorMessage: string ='';
   showImage:boolean = false;
   products: IProduct[] = [];
-  toDelArray: Array<{pID : number}>
+
 
   pName: string = ''
 
@@ -69,7 +69,7 @@ export class ProductListComponent implements OnInit {
 
   }
 
-  deleteRow(x):void {
+  deleteRow(x: any):void {
     console.log(this.products[x].productName);
     this.products.splice(x,1);
     //this.toDelArray.push(this.products[x].productId);
@@ -85,7 +85,7 @@ export class ProductListComponent implements OnInit {
   }
 
 
-  filteredProducts: IProduct[]
+  filteredProducts: IProduct[] | undefined
 
 
   private _listFilter: string = '';
@@ -98,7 +98,7 @@ export class ProductListComponent implements OnInit {
     //this.filteredProducts = this.performFilter(value);
   }
    
-  performFilter(filterBy:String){
+  performFilter(filterBy:string){
     filterBy = filterBy.toLocaleLowerCase();
     this.filteredProducts= this.products.filter( product =>
       product.productName.toLocaleLowerCase().includes(filterBy))
