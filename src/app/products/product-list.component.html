@@ -56,7 +56,7 @@
             <td>{{ product.description | backmask:5 | frontmask:5 }}</td>
             <td>{{ product.price | currency:'USD':'symbol':'1.2-3' }}</td>
             <td><pm-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'></pm-star></td>
-            <td><button class='btn btn-primary' (click)='deleteRow(i)'>Delete</button></td>
+            <td><button class='btn btn-primary' (click)='deleteRow(product)'>Delete</button></td>
           </tr>
         </tbody>
       </table>
