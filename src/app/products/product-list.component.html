@@ -5,16 +5,20 @@
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-md-2">Filter By:</div>
-      <div class="col-md-4">
+      <div class="col-md-1">
+        <span class="f-name">Filter By:</span>
+      </div>
+      <div class="col-md-5">
         <input type="text" [(ngModel)]='listFilter' (input)="performFilter(listFilter)" />
       </div>
 
-      <div class="col-md-2">Product Name: </div>
-        <div class="col-md-4">
+      <div class="col-md-1">
+        <span class="f-name">Product Name: </span> 
+      </div>
+        <div class="col-md-5">
           <input type="text" [(ngModel)]='pName' /> <br/> <br/>
         <button class='btn btn-primary' (click)='addRow()'>
-            Add1
+            Add
         </button>
       </div>
 
@@ -32,16 +36,16 @@
         <thead>
           <tr>
             <th>
-              <button class='btn btn-primary' (click)='toggleImage()'>
-                {{showImage ? 'Hide' : 'Show'}} Image
-              </button>
+
+            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" 
+              (click)='toggleImage()'>{{showImage ? 'Hide' : 'Show'}}</button>
             </th>
             <th>Product</th>
             <th>Code</th>
             <th>Available</th>
             <th>Description</th>
             <th>Price</th>
-            <th>5 star Rating</th>
+            <th>Rating</th>
           </tr>
         </thead>
         <tbody>

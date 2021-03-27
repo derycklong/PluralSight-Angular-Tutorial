@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProductService } from './product.service';
 import { IProduct } from './products';
 
@@ -12,7 +13,7 @@ import { IProduct } from './products';
 
 
 
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
 
   constructor(private productService: ProductService){}
 
@@ -23,14 +24,14 @@ export class ProductListComponent implements OnInit {
   errorMessage: string ='';
   showImage:boolean = false;
   products: IProduct[] = [];
+  sub!: Subscription
 
 
   pName: string = ''
 
   ngOnInit(): void{
-    this.productService.getProducts().subscribe({
+    this.sub = this.productService.getProducts().subscribe({
       next: products => {
-
         this.products = products;
         this.products.push({
           productId: 5,
@@ -47,8 +48,10 @@ export class ProductListComponent implements OnInit {
       },
       error: err => this.errorMessage = err
     });
-    
-    
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   addRow():void {
@@ -63,9 +66,10 @@ export class ProductListComponent implements OnInit {
       imageUrl: "assets/images/hammer.png"
 
       });
+    this.pName='';
       
-      this.performFilter(this.listFilter);
-      console.log(this.products);
+    this.performFilter(this.listFilter);
+    console.log(this.products);
 
   }
 
@@ -116,3 +120,5 @@ export class ProductListComponent implements OnInit {
 
 
 }
+
+
