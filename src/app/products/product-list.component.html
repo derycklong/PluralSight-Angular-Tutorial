@@ -5,17 +5,17 @@
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-md-1">
+      <div class="col-md-2">
         <span class="f-name">Filter By:</span>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-4">
         <input type="text" [(ngModel)]='listFilter' (input)="performFilter(listFilter)" />
       </div>
 
-      <div class="col-md-1">
+      <div class="col-md-2">
         <span class="f-name">Product Name: </span> 
       </div>
-        <div class="col-md-5">
+      <div class="col-md-4">
           <input type="text" [(ngModel)]='pName' /> <br/> <br/>
         <button class='btn btn-primary' (click)='addRow()'>
             Add
@@ -54,7 +54,10 @@
                     [title]='product.productName'
                     [style.width.px]='imageWidth'
                     [style.margin.px]='imageMargin'></td>
-            <td>{{ product.productName | backmask:0 | uppercase }}</td>
+            <td>
+              <a [routerLink]="['/products',product.productId]">
+                {{ product.productName | backmask:0  }}
+              </a></td>
             <td>{{ product.productCode | lowercase | convertToSpaces:'-' }} </td>
             <td>{{ product.releaseDate }}</td>
             <td>{{ product.description | backmask:5 | frontmask:5 }}</td>

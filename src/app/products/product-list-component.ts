@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProductService } from './product.service';
 import { IProduct } from './products';
+import { SearchService } from '../search.service';
 
 
 @Component({
@@ -11,12 +12,7 @@ import { IProduct } from './products';
   
 })
 
-
-
 export class ProductListComponent implements OnInit, OnDestroy {
-
-  constructor(private productService: ProductService){}
-
   pageTitle: string = 'Product List';
   imageWidth: number = 50;
   imageMargin: number = 2;
@@ -25,29 +21,35 @@ export class ProductListComponent implements OnInit, OnDestroy {
   showImage:boolean = false;
   products: IProduct[] = [];
   sub!: Subscription
+  sharedData!: string;
+  filteredProducts!: IProduct[]; 
+  pName!: string
 
-
-  pName: string = ''
+  constructor(private productService: ProductService, private searchService: SearchService){
+    this.sub= this.searchService.search.subscribe(value=> this.performFilter(value))
+  };
 
   ngOnInit(): void{
     this.sub = this.productService.getProducts().subscribe({
       next: products => {
         this.products = products;
-        this.products.push({
-          productId: 5,
-          productName: "Hammer",
-          productCode: "TBX-0048",
-          releaseDate: "May 21, 2021",
-          description: "Curved claw steel hammer",
-          price: 8.9,
-          starRating: 4.8,
-          imageUrl: "assets/images/hammer.png"
+        // --Just to show how to push items into object
+        // this.products.push({
+        //   productId: 5,
+        //   productName: "Hammer",
+        //   productCode: "TBX-0048",
+        //   releaseDate: "May 21, 2021",
+        //   description: "Curved claw steel hammer",
+        //   price: 8.9,
+        //   starRating: 4.8,
+        //   imageUrl: "assets/images/hammer.png"
 
-          });
+        //   });
         this.performFilter(this.listFilter);
       },
       error: err => this.errorMessage = err
     });
+
   }
 
   ngOnDestroy(): void {
@@ -91,20 +93,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   toggleImage(): void {
     this.showImage = !this.showImage;
   }
-
-
-  filteredProducts: IProduct[] | undefined
-
-
-  private _listFilter: string = '';
-  get listFilter1(): string {
-    return this._listFilter;
-  }
-  set listFilter1(value: string){
-    this._listFilter = value;
-    console.log('In Setter:'+ value);
-    //this.filteredProducts = this.performFilter(value);
-  }
    
   performFilter(filterBy:string){
     filterBy = filterBy.toLocaleLowerCase();
@@ -115,6 +103,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   onRatingClicked(message: string){
     this.pageTitle = 'Product title : ' + message;
   }
+
+
 
   
 
