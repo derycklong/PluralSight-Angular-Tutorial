@@ -19,6 +19,7 @@ export class AppComponent {
 
   search(){
     this.searchService.search.emit(this.data);
+    this.data='';
   }
 }
 

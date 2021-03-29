@@ -26,7 +26,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   pName!: string
 
   constructor(private productService: ProductService, private searchService: SearchService){
-    this.sub= this.searchService.search.subscribe(value=> this.performFilter(value))
+    this.sub= this.searchService.search.subscribe(value=> {
+      this.performFilter(value);
+      this.listFilter=value;
+    })
   };
 
   ngOnInit(): void{
